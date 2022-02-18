@@ -1,0 +1,7 @@
+.addTask {
+  flex-grow: 1;
+}
+
+.cardBody {
+  border-radius: 1rem !important;
+}

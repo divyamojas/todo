@@ -2,11 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  position: sticky;
-  top: 0;
   z-index: 1000;
-  margin: 1.5rem;
-  height: 100px;
+  height: 70px;
   color: aliceblue;
   background-color: rgb(45, 45, 255);
   border-radius: 4rem;

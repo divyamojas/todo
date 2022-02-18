@@ -1,3 +1,7 @@
-.root {
-  display: unset;
+.app {
+  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrIOSNQujGuoQ9s3GYdMtAcAGV4nKrgX5Q9Q&usqp=CAU);
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 1.5rem;
+  min-height: 100vh;
 }

@@ -1,0 +1,11 @@
+.body {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap-reverse;
+  min-height: 100vh;
+  background-color: #eee !important;
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: 2rem !important;
+  width: 100%;
+}
