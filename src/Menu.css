@@ -1,0 +1,13 @@
+.root {
+  height: 100px;
+  justify-content: center;
+  margin-bottom: 5rem;
+  border-radius: 2rem;
+}
+
+.menu__header {
+  font-family: "Lobster", cursive !important;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
