@@ -1,3 +1,14 @@
 .taskList {
   flex-grow: 4;
+  max-width: 75%;
+}
+
+.taskBlock {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+}
+
+.taskItem {
+  margin: 1rem;
 }
