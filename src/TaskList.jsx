@@ -1,63 +1,18 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  IconButton,
-  Typography,
-} from "@mui/material";
-
-import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
 import "./TaskList.css";
+import TaskItem from "./TaskItem";
 
-const TASKS = [
-  {
-    title: "Complete the website",
-    deadline: "today",
-    description: "full working website",
-  },
-  {
-    title: "Complete the website and go to party",
-    deadline: "today",
-    description: "full working website",
-  },
-  {
-    title: "Complete the website",
-    deadline: "today",
-    description: "full working website",
-  },
-  {
-    title: "Complete the website",
-    deadline: "today",
-    description: "full working website",
-  },
-  {
-    title: "Complete the website",
-    deadline: "today",
-    description: "full working website",
-  },
-];
-
-function TaskList() {
+function TaskList({ tasks, setTasks }) {
+  const handleDelete = (el) => {
+    let clone = tasks.slice();
+    clone.splice(tasks.indexOf(el), 1);
+    setTasks(clone);
+  };
   return (
     <div className="taskList">
-      <Typography variant="h3" sx={{ textAlign: "center" }}>
-        Pending Tasks!
-      </Typography>
       <div className="taskBlock">
-        {TASKS.map((el, key) => (
-          <Card sx={{ maxWidth: 345 }} className="taskItem">
-            <CardHeader
-              title={el.title}
-              subheader={`Deadline : ${el.deadline}`}
-              action={
-                <IconButton aria-label="settings" sx={{ ml: 4 }}>
-                  <DeleteIcon />
-                </IconButton>
-              }
-            />
-            <CardContent>{el.description}</CardContent>
-          </Card>
+        {tasks.map((el, key) => (
+          <TaskItem item={el} key={key} handleDelete={handleDelete} />
         ))}
       </div>
     </div>

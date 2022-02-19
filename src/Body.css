@@ -1,10 +1,12 @@
 .body {
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: flex-end;
   flex-wrap: wrap-reverse;
+  /* flex-wrap: wrap-reverse; */
   /* min-height: 100vh; */
   background-color: #eee !important;
+
   margin-top: 2rem;
   padding: 2rem;
   border-radius: 2rem !important;

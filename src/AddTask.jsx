@@ -5,15 +5,33 @@ import { Card, CardContent, CardHeader, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import "./AddTask.css";
 
-function AddTask() {
-  const [value, setValue] = useState(new Date());
+function AddTask({ tasks, setTasks }) {
+  const [taskTime, setTaskTime] = useState(new Date());
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function handleClick() {
-    setLoading(true);
-  }
-  const handleChange = (newValue) => {
-    setValue(newValue);
+  const handleClick = () => {
+    // setLoading(true);
+    setTasks([
+      {
+        title: taskTitle,
+        description: taskDescription,
+        time: taskTime,
+      },
+      ...tasks,
+    ]);
+    console.log(...tasks);
+  };
+  const handleTitle = (newVal) => {
+    console.log(newVal);
+    setTaskTitle(newVal);
+  };
+  const handleDescription = (newVal) => {
+    setTaskDescription(newVal);
+  };
+  const handleTime = (newVal) => {
+    setTaskTime(newVal);
   };
   return (
     <div className="addTask">
@@ -25,19 +43,23 @@ function AddTask() {
               required
               label="Task Name"
               placeholder="What do you have?"
+              onChange={(e) => handleTitle(e.target.value)}
+              value={taskTitle}
             />
             <TextField
               multiline
               rows={3}
               label="Task Description (Optional)"
               placeholder="Describe the task if you want.."
+              onChange={(e) => handleDescription(e.target.value)}
+              value={taskDescription}
             />
             <LocalizationProvider dateAdapter={DateAdapter}>
               <DateTimePicker
                 ampm={false}
                 label="Deadline"
-                value={value}
-                onChange={handleChange}
+                onChange={handleTime}
+                value={taskTime}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
