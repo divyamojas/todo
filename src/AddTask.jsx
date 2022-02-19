@@ -2,7 +2,7 @@ import { DateTimePicker, LoadingButton, LocalizationProvider } from "@mui/lab";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import AddIcon from "@mui/icons-material/Add";
 import { Card, CardContent, CardHeader, Stack, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./AddTask.css";
 
 function AddTask({ tasks, setTasks }) {
@@ -10,18 +10,38 @@ function AddTask({ tasks, setTasks }) {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (!loading) {
+      setTaskTime(new Date());
+      setTaskTitle("");
+      setTaskDescription("");
+    }
+  }, [loading]);
 
   const handleClick = () => {
+    let today = new Date();
     // setLoading(true);
-    setTasks([
-      {
-        title: taskTitle,
-        description: taskDescription,
-        time: taskTime,
-      },
-      ...tasks,
-    ]);
-    console.log(...tasks);
+    try {
+      taskTitle
+        ? taskTime.getTime() - today.getTime() > 0
+          ? setTasks([
+              {
+                title: taskTitle,
+                description: taskDescription,
+                time: taskTime,
+                remSecs: parseInt(
+                  (taskTime.getTime() - today.getTime()) / 1000
+                ),
+              },
+              ...tasks,
+            ])
+          : alert("Please enter a time of the future!")
+        : alert("Please enter a title for the task!");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      // console.log("no work :-P");
+    }
   };
   const handleTitle = (newVal) => {
     console.log(newVal);
@@ -58,7 +78,7 @@ function AddTask({ tasks, setTasks }) {
               <DateTimePicker
                 ampm={false}
                 label="Deadline"
-                onChange={handleTime}
+                onChange={(e) => handleTime(e._d)}
                 value={taskTime}
                 renderInput={(params) => <TextField {...params} />}
               />

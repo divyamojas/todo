@@ -9,11 +9,31 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import "./TaskItem.css";
 
 function TaskItem({ item, handleDelete }) {
+  let today = new Date();
+  function timeLeft(secs) {
+    let days, hr, min, s;
+    days = parseInt(secs / 86400);
+    hr = parseInt((secs % 86400) / 3600);
+    min = parseInt((secs % 3600) / 60);
+    s = secs % 60;
+    return days
+      ? `${days}:${hr}:${min}:${s}`
+      : hr
+      ? `0:${hr}:${min}:${s}`
+      : min
+      ? `0:0:${min}:${s}`
+      : s
+      ? `0:0:0:${s}`
+      : false;
+  }
+
   return (
     <Card sx={{ maxWidth: 345 }} className="taskItem">
       <CardHeader
         title={item.title}
-        subheader={`Deadline : ${item.time}`}
+        subheader={
+          item.remSecs > 0 ? `${timeLeft(item.remSecs)}` : "DEADLINE MISSED!"
+        }
         action={
           <IconButton
             aria-label="settings"

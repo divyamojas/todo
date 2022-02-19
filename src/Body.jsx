@@ -9,46 +9,55 @@ function Body() {
     {
       title: "1DSA practice",
       time: "today",
+      remSecs: 0,
       description: "full working website",
     },
     {
       title: "2Complete",
       time: "today",
+      remSecs: 0,
       description: "full working website",
     },
     {
       title: "3Complete the website and go to party",
       time: "today",
+      remSecs: 0,
       description: "full working website",
     },
     {
       title: "4Complete the website",
       time: "today",
+      remSecs: 0,
       description: "full working website",
     },
     {
       title: "5Complete the website",
       time: "today",
+      remSecs: 0,
       description: "full working website",
     },
     {
       title: "6Complete the website",
       time: "today",
+      remSecs: 0,
       description: "full working website",
     },
     {
       title: "7Complete the website",
       time: "today",
+      remSecs: 0,
       description: "full working website",
     },
     {
       title: "8Complete the website",
       time: "today",
+      remSecs: 0,
       description: "full working website",
     },
     {
       title: "9Complete the website",
       time: "today",
+      remSecs: 0,
       description: "full working website",
     },
   ]);
