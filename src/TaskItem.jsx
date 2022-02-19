@@ -16,15 +16,7 @@ function TaskItem({ item, handleDelete }) {
     hr = parseInt((secs % 86400) / 3600);
     min = parseInt((secs % 3600) / 60);
     s = secs % 60;
-    return days
-      ? `${days}:${hr}:${min}:${s}`
-      : hr
-      ? `0:${hr}:${min}:${s}`
-      : min
-      ? `0:0:${min}:${s}`
-      : s
-      ? `0:0:0:${s}`
-      : false;
+    return `${days}:${hr}:${min}:${s}`;
   }
 
   return (
