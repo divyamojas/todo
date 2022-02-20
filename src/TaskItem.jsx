@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -6,10 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import "./TaskItem.css";
 
-function TaskItem({ item, handleDelete }) {
-  let today = new Date();
+function TaskItem({ item, handleDelete, timer }) {
   function timeLeft(secs) {
     let days, hr, min, s;
     days = parseInt(secs / 86400);
@@ -18,13 +19,30 @@ function TaskItem({ item, handleDelete }) {
     s = secs % 60;
     return `${days}:${hr}:${min}:${s}`;
   }
-
+  useEffect(() => {
+    item.remSecs -= 1;
+  }, [timer]);
   return (
     <Card sx={{ maxWidth: 345 }} className="taskItem">
       <CardHeader
         title={item.title}
         subheader={
-          item.remSecs > 0 ? `${timeLeft(item.remSecs)}` : "DEADLINE MISSED!"
+          <div className="timeBar">
+            <AccessTimeIcon
+              sx={{ mr: 1, color: item.remSecs > 0 ? "inherit" : "red" }}
+              fontSize="small"
+            />
+            <Typography
+              sx={{
+                fontSize: "0.9rem",
+                color: item.remSecs > 0 ? "inherit" : "red",
+              }}
+            >
+              {item.remSecs > 0
+                ? `${timeLeft(item.remSecs)}`
+                : "You are Late buddy :-("}
+            </Typography>
+          </div>
         }
         action={
           <IconButton

@@ -44,7 +44,6 @@ function AddTask({ tasks, setTasks }) {
     }
   };
   const handleTitle = (newVal) => {
-    console.log(newVal);
     setTaskTitle(newVal);
   };
   const handleDescription = (newVal) => {
