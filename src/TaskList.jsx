@@ -1,8 +1,9 @@
 import React from "react";
 import "./TaskList.css";
 import TaskItem from "./TaskItem";
-import { Typography } from "@mui/material";
 import { useState } from "react";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "./Firebase";
 
 function TaskList({ tasks, setTasks }) {
   const [timer, setTimer] = useState(false);
@@ -12,9 +13,11 @@ function TaskList({ tasks, setTasks }) {
     let clone = tasks.slice();
     clone.splice(tasks.indexOf(el), 1);
     setTasks(clone);
+    (async function () {
+      await deleteDoc(doc(db, "creator", el.title));
+    })();
   };
 
-  let today = new Date();
   return (
     <div className="taskList">
       <div className="taskBlock">

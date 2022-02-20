@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
+import { setDoc, doc } from "firebase/firestore";
 import { DateTimePicker, LoadingButton, LocalizationProvider } from "@mui/lab";
 import DateAdapter from "@mui/lab/AdapterMoment";
 import AddIcon from "@mui/icons-material/Add";
 import { Card, CardContent, CardHeader, Stack, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { db } from "./Firebase";
 import "./AddTask.css";
 
 function AddTask({ tasks, setTasks }) {
@@ -20,23 +22,33 @@ function AddTask({ tasks, setTasks }) {
 
   const handleClick = () => {
     let today = new Date();
-    // setLoading(true);
     try {
-      taskTitle
-        ? taskTime.getTime() - today.getTime() > 0
-          ? setTasks([
-              {
-                title: taskTitle,
-                description: taskDescription,
-                time: taskTime,
-                remSecs: parseInt(
-                  (taskTime.getTime() - today.getTime()) / 1000
-                ),
-              },
-              ...tasks,
-            ])
-          : alert("Please enter a time of the future!")
-        : alert("Please enter a title for the task!");
+      if (taskTitle) {
+        if (taskTime.getTime() - today.getTime() > 0) {
+          setLoading(true);
+          setTasks([
+            {
+              title: taskTitle,
+              description: taskDescription,
+              time: taskTime,
+              remSecs: parseInt((taskTime.getTime() - today.getTime()) / 1000),
+            },
+            ...tasks,
+          ]);
+          (async function () {
+            await setDoc(doc(db, "creator", taskTitle), {
+              title: taskTitle,
+              description: taskDescription,
+              time: taskTime,
+              remSecs: parseInt((taskTime.getTime() - today.getTime()) / 1000),
+            });
+          })().then(() => setLoading(false));
+        } else {
+          alert("Please enter a time of the future!");
+        }
+      } else {
+        alert("Please enter a title for the task!");
+      }
     } catch (err) {
       console.log(err);
     } finally {
