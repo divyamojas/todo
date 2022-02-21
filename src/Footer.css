@@ -1,0 +1,16 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  width: 100%;
+  background-color: rgb(31, 31, 31);
+  height: 12rem;
+  border-radius: 2rem;
+  box-shadow: inset 0 0 1rem 0rem rgba(0, 0, 0, 0.993);
+}
+
+.text {
+  font-family: "Lobster";
+  color: rgb(180, 190, 199);
+}
