@@ -1,11 +1,4 @@
-import {
-  collection,
-  doc,
-  getDocs,
-  onSnapshot,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Card } from "@mui/material";
 import AddTask from "./AddTask";
@@ -20,11 +13,10 @@ function Body() {
       setTasks(
         snapshot.docs
           .map((doc) => doc.data())
-          .sort((a, b) => a.remSecs - b.remSecs)
+          .sort((a, b) => a.time["seconds"] - b.time["seconds"])
       );
     });
   }, []);
-
   return (
     <Card className="body">
       <TaskList tasks={tasks} setTasks={setTasks} />

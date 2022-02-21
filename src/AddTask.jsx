@@ -31,7 +31,8 @@ function AddTask({ tasks, setTasks }) {
               title: taskTitle,
               description: taskDescription,
               time: taskTime,
-              remSecs: parseInt((taskTime.getTime() - today.getTime()) / 1000),
+              // remSecs: () =>
+              //   parseInt((this.time.getTime() - today.getTime()) / 1000),
             },
             ...tasks,
           ]);
@@ -40,7 +41,6 @@ function AddTask({ tasks, setTasks }) {
               title: taskTitle,
               description: taskDescription,
               time: taskTime,
-              remSecs: parseInt((taskTime.getTime() - today.getTime()) / 1000),
             });
           })().then(() => setLoading(false));
         } else {

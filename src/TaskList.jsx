@@ -1,14 +1,13 @@
-import React from "react";
 import "./TaskList.css";
 import TaskItem from "./TaskItem";
 import { useState } from "react";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "./Firebase";
+import { Typography } from "@mui/material";
 
 function TaskList({ tasks, setTasks }) {
   const [timer, setTimer] = useState(false);
-  setTimeout(() => setTimer(!timer), 1000);
-
+  setTimeout(() => setTimer(!timer), 1000); // refreshes states every 1 second
   const handleDelete = (el) => {
     let clone = tasks.slice();
     clone.splice(tasks.indexOf(el), 1);
@@ -21,14 +20,19 @@ function TaskList({ tasks, setTasks }) {
   return (
     <div className="taskList">
       <div className="taskBlock">
-        {tasks.map((el, key) => (
-          <TaskItem
-            item={el}
-            key={key}
-            handleDelete={handleDelete}
-            timer={timer}
-          />
-        ))}
+        {tasks.length ? (
+          tasks.map((el, key) => (
+            <TaskItem item={el} key={key} handleDelete={handleDelete} />
+          ))
+        ) : (
+          <Typography
+            variant="h4"
+            sx={{ color: "#bbb", fontFamily: "Lobster", textAlign: "center" }}
+          >
+            Woooohooooo! <br />
+            You have finished all work!
+          </Typography>
+        )}
       </div>
     </div>
   );
