@@ -4,10 +4,7 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  // MenuItem,
-  // Menu,
   CssBaseline,
-  // Box,
   SwipeableDrawer,
   useScrollTrigger,
   Slide,
@@ -15,7 +12,6 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import DrawerContent from "./drawerContent/DrawerContent";
 import ThemeSwitchButton from "../others/ThemeSwitchButton";
-import StyledAvatar from "../others/StyledAvatar";
 
 function HideOnScroll(props) {
   const { children, window } = props;

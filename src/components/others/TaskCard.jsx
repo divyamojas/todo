@@ -49,7 +49,7 @@ function TaskCard({ task, theme }) {
         <CardActions disableSpacing>
           {[faCircleNotch, faArchive, faTrash, faEllipsisH].map(
             (icon, index) => (
-              <IconButton aria-label="add to favorites" key={index}>
+              <IconButton aria-label="actions" key={index}>
                 <FontAwesomeIcon icon={icon} size="xs" />
               </IconButton>
             )

@@ -23,7 +23,7 @@ function AddTaskButton({ theme }) {
       <Fab
         size="secondary"
         aria-label="add-task"
-        color= "primary"
+        color="primary"
         sx={{
           position: "fixed",
           bottom: "5vh",

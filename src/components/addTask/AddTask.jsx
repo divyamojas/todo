@@ -1,12 +1,12 @@
-import { faCalendarDay } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Box,
   Button,
   Card,
+  CardActions,
   CardContent,
   Container,
   TextField,
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -25,7 +25,12 @@ function AddTask({ theme }) {
     } else alert("Enter Title to Continue");
   };
   return (
-    <Card style={{ backgroundColor: theme.palette.background.default }}>
+    <Card
+      style={{
+        backgroundColor: theme.palette.background.default,
+        boxShadow: `0px 0px 15px 15px ${theme.palette.primary.main}`,
+      }}
+    >
       <CardContent
         style={{
           display: "flex",
@@ -79,20 +84,42 @@ function AddTask({ theme }) {
             onChange={(e) => setTaskDescription(e.target.value)}
           />
         </Box>
-        <Box
+        <CardActions
           style={{
             display: "flex",
             width: "60vw",
             alignItems: "center",
             justifyContent: "space-between",
           }}
-          mt={3}
+          pt={4}
         >
-          <FontAwesomeIcon icon={faCalendarDay} size="2x" />
-          <Button variant="contained" onClick={handleAddTask}>
-            Add
+          <Typography
+            variant="body1"
+            sx={{
+              fontWeight: 600,
+              color:
+                theme.palette.mode === "light"
+                  ? theme.palette.primary.main
+                  : theme.palette.grey[100],
+              cursor: "pointer",
+              lineHeight: 2,
+            }}
+          >
+            Select Time
+          </Typography>
+          <Button variant={taskTitle ? "contained" : "disabled"}>
+            <Typography
+              sx={{
+                fontWeight: 600,
+              }}
+              variant="body1"
+              onClick={handleAddTask}
+              disabled={taskTitle ? false : true}
+            >
+              Add Task
+            </Typography>
           </Button>
-        </Box>
+        </CardActions>
       </CardContent>
     </Card>
   );
