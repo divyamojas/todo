@@ -1,8 +1,11 @@
 import { Box } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
+import { tasks } from "../../reducers/taskSlice";
 import TaskCard from "./TaskCard";
 
-function TaskBlock() {
+function TaskBlock({theme}) {
+  const taskList = useSelector(tasks);
   return (
     <Box
       mt={2}
@@ -13,18 +16,9 @@ function TaskBlock() {
         flexWrap: "wrap",
       }}
     >
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6].map(
-        (task, index) => (
-          <TaskCard
-            task={
-              index % 5 === 0
-                ? "Hey! This is one of the tasks"
-                : "Hey! This is one of the tasksHey! This is one of the tasks"
-            }
-            key={index}
-          />
-        )
-      )}
+      {taskList.map((task, index) => (
+        <TaskCard task={task} key={index} theme = {theme} />
+      ))}
     </Box>
   );
 }

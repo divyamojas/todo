@@ -1,12 +1,15 @@
-import { Box } from "@mui/material";
 import React from "react";
+import { Box } from "@mui/material";
 import Home from "./Home/Home";
 
-function Body() {
+function Body({theme}) {
   return (
-    <Box sx={{ backgroundColor: "#EBEBEB", minHeight: "100vh" }} px={4}>
+    <Box
+      sx={{ backgroundColor: theme.palette.background.default, minHeight: "100vh" }}
+      px={4}
+    >
       <Box pt={8} />
-      <Home />
+      <Home theme = {theme}/>
       {/* <Tasks/>
     <Completed/>
     <Archive/>

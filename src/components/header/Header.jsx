@@ -4,10 +4,10 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  MenuItem,
-  Menu,
+  // MenuItem,
+  // Menu,
   CssBaseline,
-  Box,
+  // Box,
   SwipeableDrawer,
   useScrollTrigger,
   Slide,
@@ -30,7 +30,7 @@ function HideOnScroll(props) {
   );
 }
 
-export default function HideAppBar() {
+export default function Header({ theme }) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [state, setState] = React.useState(false);
@@ -64,7 +64,7 @@ export default function HideAppBar() {
       <CssBaseline />
 
       <HideOnScroll>
-        <AppBar sx={{ backgroundColor: "#145D84" }}>
+        <AppBar sx={{ backgroundColor: theme.palette.primary.main }}>
           <Toolbar>
             <IconButton
               size="large"
@@ -82,15 +82,16 @@ export default function HideAppBar() {
               open={state}
               onClose={toggleDrawer(false)}
               onOpen={toggleDrawer(true)}
+              style={{ backgroundColor: theme.palette.secondary.main }}
             >
-              <DrawerContent toggleDrawer={toggleDrawer} />
+              <DrawerContent theme={theme} toggleDrawer={toggleDrawer} />
             </SwipeableDrawer>
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               ToDos
             </Typography>
 
-            {auth && (
+            {/* {auth && (
               <Box sx={{ display: "flex" }}>
                 <IconButton
                   size="large"
@@ -100,7 +101,7 @@ export default function HideAppBar() {
                   onClick={handleMenu}
                   color="inherit"
                 >
-                  <StyledAvatar size="30px" img="" />
+                  <StyledAvatar theme={theme} size="30px" img="" />
                 </IconButton>
                 <Menu
                   id="menu-appbar"
@@ -120,9 +121,9 @@ export default function HideAppBar() {
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>
                 </Menu>
-                <ThemeSwitchButton />
-              </Box>
-            )}
+                </Box>
+              )} */}
+            <ThemeSwitchButton theme={theme} />
           </Toolbar>
         </AppBar>
       </HideOnScroll>

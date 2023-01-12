@@ -15,14 +15,15 @@ import {
 } from "@mui/material";
 import React from "react";
 
-function TaskCard({ task }) {
+function TaskCard({ task, theme }) {
   return (
-    <Box m={2}>
+    <Box my={2} mx = {1}>
       <Card
         sx={{
-          maxWidth: 216,
+          width: 216,
           minHeight: 72,
-          // backgroundColor: "#dadadaa",
+          backgroundColor:
+            theme.palette.mode === "light" ? "#dadada8a" : "#4242428a",
           borderRadius: "10px",
           boxShadow:
             "0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px -4px 1px rgba(0, 0, 0, 0.25)",
@@ -30,8 +31,19 @@ function TaskCard({ task }) {
       >
         <CardContent>
           <Typography variant="caption">Due Today</Typography>
-          <Typography variant="body1" color="text.primary">
-            {task}
+          <Typography
+            variant="body1"
+            color="text.primary"
+            style={{ overflow: "hidden" }}
+          >
+            {task.title}
+          </Typography>
+          <Typography
+            variant="body1"
+            color="text.primary"
+            style={{ overflow: "hidden" }}
+          >
+            {task.description}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

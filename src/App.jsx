@@ -1,15 +1,18 @@
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import AddTask from './components/addTask/AddTask';
-import Body from './components/body/Body';
-import Header from './components/header/Header';
-import theme from './theme';
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { useSelector } from "react-redux";
+import Body from "./components/body/Body";
+import Header from "./components/header/Header";
+import themes from "./theme";
 
 function App() {
+  const mode = useSelector((state) => state.mode.value);
+  const theme=mode ? themes.lightTheme : themes.darkTheme;
+
   return (
-    <ThemeProvider theme={theme.lightTheme }>
-      <CssBaseline/>
-      <Header/>
-      <Body />
+    <ThemeProvider theme={theme} >
+      <CssBaseline />
+      <Header theme = {theme}/>
+      <Body theme = {theme}/>
     </ThemeProvider>
   );
 }

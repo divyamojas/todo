@@ -1,10 +1,10 @@
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, Container, Drawer, Fab } from "@mui/material";
+import { Container, Drawer, Fab } from "@mui/material";
 import React from "react";
 import AddTask from "./AddTask";
 
-function AddTaskButton() {
+function AddTaskButton({ theme }) {
   const [state, setState] = React.useState(false);
 
   const toggleDrawer = (open) => (event) => {
@@ -23,14 +23,11 @@ function AddTaskButton() {
       <Fab
         size="secondary"
         aria-label="add-task"
+        color= "primary"
         sx={{
           position: "fixed",
           bottom: "5vh",
           right: "5vw",
-          backgroundColor: "#145D84",
-          "&:hover": {
-            backgroundColor: "#001e3c",
-          },
         }}
         onClick={toggleDrawer(true)}
       >
@@ -38,7 +35,7 @@ function AddTaskButton() {
       </Fab>
       <Drawer anchor="bottom" open={state} onClose={toggleDrawer(false)}>
         <Container>
-          <AddTask />
+          <AddTask theme={theme} />
         </Container>
       </Drawer>
     </React.Fragment>

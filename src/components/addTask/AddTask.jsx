@@ -5,14 +5,27 @@ import {
   Button,
   Card,
   CardContent,
+  Container,
   TextField,
 } from "@mui/material";
-import { Container } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTask } from "../../reducers/taskSlice";
 
-function AddTask() {
+function AddTask({ theme }) {
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
+  const dispatch = useDispatch();
+
+  const handleAddTask = () => {
+    if (taskTitle !== "") {
+      dispatch(addTask({ title: taskTitle, description: taskDescription }));
+      setTaskTitle("");
+      setTaskDescription("");
+    } else alert("Enter Title to Continue");
+  };
   return (
-    <Card>
+    <Card style={{ backgroundColor: theme.palette.background.default }}>
       <CardContent
         style={{
           display: "flex",
@@ -22,37 +35,48 @@ function AddTask() {
         }}
       >
         <Container
-          style={{ textAlign: "center", fontSize: "32px", fontWeight: "600"}}
+          style={{ textAlign: "center", fontSize: "32px", fontWeight: "600" }}
         >
           Add Task
         </Container>
         <Box
           style={{
             display: "flex",
+            flexWrap: "wrap",
             width: "60vw",
             alignItems: "center",
             justifyContent: "Space-between",
           }}
         >
           <TextField
-            id="standard-multiline-flexible"
-            label="Multiline"
+            id="standard-textarea"
+            placeholder="add ..Task Title"
             multiline
             maxRows={4}
             variant="standard"
+            required
             style={{
               width: "29vw",
+              minWidth: 216,
             }}
+            mx={2}
+            value={taskTitle}
+            onChange={(e) => setTaskTitle(e.target.value)}
           />
+
           <TextField
-            id="standard-multiline-flexible"
-            label="Multiline"
+            id="standard-textarea"
+            placeholder="add ..Task Description"
             multiline
             maxRows={4}
             variant="standard"
             style={{
               width: "29vw",
+              minWidth: 216,
             }}
+            mx={2}
+            value={taskDescription}
+            onChange={(e) => setTaskDescription(e.target.value)}
           />
         </Box>
         <Box
@@ -65,12 +89,7 @@ function AddTask() {
           mt={3}
         >
           <FontAwesomeIcon icon={faCalendarDay} size="2x" />
-          <Button
-            style={{
-              backgroundColor: "#145D84",
-              color: "white",
-            }}
-          >
+          <Button variant="contained" onClick={handleAddTask}>
             Add
           </Button>
         </Box>

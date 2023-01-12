@@ -8,9 +8,10 @@ import { Box } from "@mui/material";
 import React from "react";
 import DayHeader from "../../../others/DayHeader";
 
-function HeadBlock() {
+function HeadBlock({ theme }) {
   return (
     <React.Fragment>
+      {" "}
       <Box
         sx={{
           display: "flex",
@@ -21,8 +22,12 @@ function HeadBlock() {
         mb={2}
         ml={2}
       >
-        <DayHeader />
-        <FontAwesomeIcon icon={faSliders} />
+        <FontAwesomeIcon icon={faChevronCircleLeft} color="#A4A4B0" size="2x" />
+        <FontAwesomeIcon
+          icon={faChevronCircleRight}
+          color="#A4A4B0"
+          size="2x"
+        />
       </Box>
       <Box
         sx={{
@@ -30,13 +35,13 @@ function HeadBlock() {
           justifyContent: "space-between",
           alignItems: "baseline",
         }}
-        mb={2} px = {2}
+        // mb={2}
+        px={2}
       >
-        <FontAwesomeIcon icon={faChevronCircleLeft} color="#A4A4B0" size="2x" />
+        <DayHeader theme={theme} />
         <FontAwesomeIcon
-          icon={faChevronCircleRight}
-          color="#A4A4B0"
-          size="2x"
+          icon={faSliders}
+          color={theme.palette.text.secondary}
         />
       </Box>
     </React.Fragment>

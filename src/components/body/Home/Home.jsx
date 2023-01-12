@@ -4,13 +4,13 @@ import AddTaskButton from "../../addTask/AddTaskButton";
 import TaskBlock from "../../others/TaskBlock";
 import HeadBlock from "./components/HeadBlock";
 
-function Home() {
+function Home({theme}) {
   return (
     <React.Fragment>
-      <HeadBlock />
+      <HeadBlock theme = {theme}/>
       <Divider />
-      <TaskBlock />
-      <AddTaskButton />
+      <TaskBlock theme = {theme}/>
+      <AddTaskButton theme = {theme}/>
     </React.Fragment>
   );
 }
