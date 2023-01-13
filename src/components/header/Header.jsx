@@ -27,8 +27,6 @@ function HideOnScroll(props) {
 }
 
 export default function Header({ theme }) {
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [state, setState] = React.useState(false);
 
   const toggleDrawer = (open) => (event) => {
@@ -41,18 +39,6 @@ export default function Header({ theme }) {
     }
 
     setState(open);
-  };
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
   };
 
   return (
@@ -86,39 +72,6 @@ export default function Header({ theme }) {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               ToDos
             </Typography>
-
-            {/* {auth && (
-              <Box sx={{ display: "flex" }}>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                  <StyledAvatar theme={theme} size="30px" img="" />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Menu>
-                </Box>
-              )} */}
             <ThemeSwitchButton theme={theme} />
           </Toolbar>
         </AppBar>
