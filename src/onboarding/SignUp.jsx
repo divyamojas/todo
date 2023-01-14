@@ -24,11 +24,11 @@ export default function SignUp({ theme }) {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   async function handleClick() {
     createUserWithEmailAndPassword(auth, creds.email, creds.password)
       .then(dispatch(signup({ email: creds.email, password: creds.password })))
-      .then(navigate("/home"));
+      .then(navigate("/tasks"));
   }
 
   const handleChange = (e) => {

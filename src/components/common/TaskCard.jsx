@@ -13,11 +13,12 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import Menu from "./Menu";
 import React from "react";
 
 function TaskCard({ task, theme }) {
   return (
-    <Box my={2} mx = {1}>
+    <Box my={2} mx={1}>
       <Card
         sx={{
           width: 216,
@@ -47,13 +48,12 @@ function TaskCard({ task, theme }) {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          {[faCircleNotch, faArchive, faTrash, faEllipsisH].map(
-            (icon, index) => (
-              <IconButton aria-label="actions" key={index}>
-                <FontAwesomeIcon icon={icon} size="xs" />
-              </IconButton>
-            )
-          )}
+          {[faCircleNotch, faArchive, faTrash].map((icon, index) => (
+            <IconButton aria-label="actions" key={index}>
+              <FontAwesomeIcon icon={icon} size="xs" />
+            </IconButton>
+          ))}
+          <Menu button={<FontAwesomeIcon icon={faEllipsisH} size="xs" />} />
         </CardActions>
       </Card>
     </Box>

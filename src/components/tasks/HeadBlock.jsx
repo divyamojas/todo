@@ -6,7 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "@mui/material";
 import React from "react";
-import DayHeader from "../../../others/DayHeader";
+import DayHeader from "../common/DayHeader";
 
 function HeadBlock({ theme }) {
   return (

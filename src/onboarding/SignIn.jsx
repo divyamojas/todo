@@ -31,7 +31,7 @@ export default function SignIn({ theme }) {
   async function handleClick() {
     signInWithEmailAndPassword(auth, creds.email, creds.password)
       .then(dispatch(signup({ email: creds.email, password: creds.password })))
-      .then(navigate("/home"));
+      .then(navigate("/tasks"));
   }
   return (
     <Box

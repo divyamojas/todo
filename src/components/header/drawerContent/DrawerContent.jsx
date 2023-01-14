@@ -4,6 +4,7 @@ import {
   faCheck,
   faCircleNotch,
   faSignOut,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -18,26 +19,21 @@ import {
 import { Box } from "@mui/system";
 import { signOut } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../../Firebase";
 import { logout } from "../../../reducers/authSlice";
-import StyledAvatar from "../../others/StyledAvatar";
+import StyledAvatar from "../../common/StyledAvatar";
 
 function DrawerContent({ toggleDrawer, theme }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function logOut() {
-    signOut(auth).then(dispatch(logout())).then(navigate("/signIn"));
-  }
-  const tasks = () => {};
-  const completed = () => {};
-  const archived = () => {};
   const menuContent = [
-    { icon: faCircleNotch, text: "Tasks", func: tasks },
-    { icon: faCheck, text: "Completed", func: completed },
-    { icon: faArchive, text: "Archived", func: archived },
-    { icon: faSignOut, text: "Sign Out", func: logOut },
+    { icon: faCircleNotch, text: "Tasks", link: "/tasks" },
+    { icon: faCheck, text: "Completed", link: "/completed" },
+    { icon: faArchive, text: "Archived", link: "/archived" },
+    { icon: faTrash, text: "Bin", link: "/bin" },
+    { icon: faSignOut, text: "Sign Out", link: "none" },
   ];
 
   return (
@@ -71,29 +67,42 @@ function DrawerContent({ toggleDrawer, theme }) {
         onClick={toggleDrawer(false)}
         onKeyDown={toggleDrawer(false)}
       >
-        <List>
+        <List style={{ width: "100%" }}>
           {menuContent.map((content, index) => (
-            <ListItem
-              key={index}
-              disablePadding
+            <ListItem key={index} disablePadding>
+              <Link
+                to={content.link !== "none" && content.link}
+                style={{
+                  textDecoration: "none",
+                  width: "100%",
+                }}
               >
-              <ListItemButton onClick={content.func}
-                style={{ width: "100% !important" }}
-              >
-                <ListItemIcon>
-                  <FontAwesomeIcon
-                    icon={content.icon}
-                    size="lg"
-                    color={theme.palette.secondary.contrastText}
+                <ListItemButton
+                  onClick={
+                    content.link === "none"
+                      ? () =>
+                          signOut(auth)
+                            .then(navigate("/signin"))
+                            .then(dispatch(logout()))
+                      : () => {}
+                  }
+                  style={{ width: "100% !important" }}
+                >
+                  <ListItemIcon>
+                    <FontAwesomeIcon
+                      icon={content.icon}
+                      size="lg"
+                      color={theme.palette.secondary.contrastText}
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={content.text}
+                    style={{
+                      color: theme.palette.secondary.contrastText,
+                    }}
                   />
-                </ListItemIcon>
-                <ListItemText
-                  primary={content.text}
-                  style={{
-                    color: theme.palette.secondary.contrastText,
-                  }}
-                />
-              </ListItemButton>
+                </ListItemButton>
+              </Link>
             </ListItem>
           ))}
         </List>

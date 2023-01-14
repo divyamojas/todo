@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import DrawerContent from "./drawerContent/DrawerContent";
-import ThemeSwitchButton from "../others/ThemeSwitchButton";
+import ThemeSwitchButton from "../common/ThemeSwitchButton";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -26,7 +26,7 @@ function HideOnScroll(props) {
   );
 }
 
-export default function Header({ theme }) {
+export default function Header({ theme, header }) {
   const [state, setState] = React.useState(false);
 
   const toggleDrawer = (open) => (event) => {
@@ -70,7 +70,7 @@ export default function Header({ theme }) {
             </SwipeableDrawer>
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              ToDos
+              {header}
             </Typography>
             <ThemeSwitchButton theme={theme} />
           </Toolbar>
