@@ -1,8 +1,5 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { IconButton } from "@mui/material";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 
 export default function BasicMenu({ button }) {
   const [anchorEl, setAnchorEl] = React.useState(null);

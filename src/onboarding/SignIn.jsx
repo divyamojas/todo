@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -13,10 +14,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../Firebase";
-import { signup } from "../reducers/authSlice";
+import { signin } from "../reducers/authSlice";
 
 export default function SignIn({ theme }) {
   const [creds, setCreds] = useState({ email: "", password: "" });
+  const [authError, setAuthError] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,9 +31,17 @@ export default function SignIn({ theme }) {
   };
 
   async function handleClick() {
-    signInWithEmailAndPassword(auth, creds.email, creds.password)
-      .then(dispatch(signup({ email: creds.email, password: creds.password })))
-      .then(navigate("/tasks"));
+    try {
+      await signInWithEmailAndPassword(auth, creds.email, creds.password).then(
+        () => {
+          navigate("/tasks");
+          dispatch(signin({ email: creds.email, password: creds.password }));
+          setAuthError(false);
+        }
+      );
+    } catch (err) {
+      setAuthError(true);
+    }
   }
   return (
     <Box
@@ -66,6 +76,11 @@ export default function SignIn({ theme }) {
         >
           <Typography variant="h4">Sign In!</Typography>
           <Divider />
+          {authError && (
+            <Alert severity="warning">
+              Please Check you Email and Password!
+            </Alert>
+          )}{" "}
           <Stack spacing={2} sx={{ minWidth: 300 }}>
             <TextField
               value={creds.email}

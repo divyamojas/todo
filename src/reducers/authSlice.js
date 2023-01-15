@@ -28,7 +28,7 @@ export const authSlice = createSlice({
             }
 
         },
-        logout: (state) => {
+        signout: (state) => {
             state.value = {
                 email: '',
                 password: ''
@@ -38,7 +38,7 @@ export const authSlice = createSlice({
     }
 })
 
-export const { signup, logout } = authSlice.actions
+export const { signup, signin, signout } = authSlice.actions
 export const authObj = state => state.auth.value
 
 export default authSlice.reducer

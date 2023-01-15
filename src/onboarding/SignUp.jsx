@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -22,13 +23,26 @@ export default function SignUp({ theme }) {
     password: "",
     passwordConf: "",
   });
+  const [authError, setAuthError] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   async function handleClick() {
-    createUserWithEmailAndPassword(auth, creds.email, creds.password)
-      .then(dispatch(signup({ email: creds.email, password: creds.password })))
-      .then(navigate("/tasks"));
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        creds.email,
+        creds.password
+      ).then(() => {
+        dispatch(signup({ email: creds.email, password: creds.password }));
+        navigate("/tasks");
+        setAuthError(false);
+      });
+    } catch (err) {
+      setAuthError(true);
+      console.log(err.value);
+    }
   }
 
   const handleChange = (e) => {
@@ -72,6 +86,9 @@ export default function SignUp({ theme }) {
         >
           <Typography variant="h4">Sign Up!</Typography>
           <Divider />
+          {authError && (
+            <Alert severity="warning">Failed to Sign up!</Alert>
+          )}{" "}
           <Stack spacing={2} sx={{ minWidth: 300 }}>
             <TextField
               value={creds.name}

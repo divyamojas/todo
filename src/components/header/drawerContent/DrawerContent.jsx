@@ -21,7 +21,7 @@ import { signOut } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../../Firebase";
-import { logout } from "../../../reducers/authSlice";
+import { signout } from "../../../reducers/authSlice";
 import StyledAvatar from "../../common/StyledAvatar";
 
 function DrawerContent({ toggleDrawer, theme }) {
@@ -35,6 +35,12 @@ function DrawerContent({ toggleDrawer, theme }) {
     { icon: faTrash, text: "Bin", link: "/bin" },
     { icon: faSignOut, text: "Sign Out", link: "none" },
   ];
+  async function handleSignOut() {
+    await signOut(auth).then(() => {
+      navigate("/signin");
+      dispatch(signout());
+    });
+  }
 
   return (
     <React.Fragment>
@@ -78,14 +84,7 @@ function DrawerContent({ toggleDrawer, theme }) {
                 }}
               >
                 <ListItemButton
-                  onClick={
-                    content.link === "none"
-                      ? () =>
-                          signOut(auth)
-                            .then(navigate("/signin"))
-                            .then(dispatch(logout()))
-                      : () => {}
-                  }
+                  onClick={content.link === "none" ? handleSignOut : () => {}}
                   style={{ width: "100% !important" }}
                 >
                   <ListItemIcon>
