@@ -111,7 +111,8 @@ export default function SignIn({ theme }) {
               <Typography
                 variant="caption"
                 color={theme.palette.primary.main}
-                sx={{ fontWeight: 600 }}
+                sx={{ fontWeight: 600, cursor: "pointer" }}
+                onClick={() => navigate("/reset-password")}
               >
                 Forgot Password?
               </Typography>

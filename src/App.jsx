@@ -12,13 +12,13 @@ import Bin from "./pages/Bin";
 import SignIn from "./onboarding/SignIn";
 import SignUp from "./onboarding/SignUp";
 import { auth } from "./Firebase";
+import PasswordReset from "./onboarding/PasswordReset";
 
 function App() {
   const mode = useSelector((state) => state.mode.value);
   const theme = mode ? themes.lightTheme : themes.darkTheme;
 
   const { currentUser } = auth;
-
 
   console.log(auth);
   return (
@@ -37,6 +37,10 @@ function App() {
         />
         <Route path="/signin" element={<SignIn theme={theme} />} />
         <Route path="/signup" element={<SignUp theme={theme} />} />
+        <Route
+          path="/reset-password"
+          element={<PasswordReset theme={theme} />}
+        />
         <Route path="/tasks" element={<Tasks theme={theme} header="Tasks" />} />
         <Route
           path="/completed"
